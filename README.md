@@ -1,27 +1,43 @@
-# RedPlag
+# Red Plag - SSL
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+We are building a cloud based plagiarism detector using Angular and Python.\
+We'll also develop a Command Line Interface using [click](https://click.palletsprojects.com) library in Python.
 
-## Development server
+## :memo: To Do :memo:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Frontend :relieved:
+  - Login page
+  - Registration page
+  - User Authentication :closed_lock_with_key:
+  - Main page
+- Database for user details :card_file_box:
+- The Algorithm :skull_and_crossbones:
+  - Deciding the algo :thinking:
+  - Implementing the algo :computer:
+  - Testing!!! :test_tube:
+  - Visualizing the result :chart_with_upwards_trend:
+- Command line interface
 
-## Code scaffolding
+## Instructions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### :gear: Initial Setup :gear:
 
-## Build
+1. Clone the repository.
+2. Run `npm install` to install node modules.
+3. Voila! You can now work on your machine.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### :thinking: Making changes!? :thinking:
 
-## Running unit tests
+1. Keep working on a separate branch, create one if necessary.
+2. After finishing make a pull request.
+3. Wait for someone(at least 2) to review it.
+4. If there is/are any problem(s) then fix them otherwise congratulation!!
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+:warning::exclamation:Do **NOT** make any changes in the main branch without discussing with team members.
 
-## Running end-to-end tests
+## :sparkles: Team :sparkles:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- [Amit Meena](https://github.com/meenaamit)
+- [Atin Bainada](https://github.com/LeoAB10)
+- [Koustav Sen](https://github.com/koustav1908)
+- [Soham Mistri](https://github.com/sohammistri)
