@@ -7,18 +7,25 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  hide = true;
   login_form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    pass: [''],
-  });
-  getErrorMessage() {
-    let email = this.login_form.get('email');
-    if (email.hasError('required')) {
-      return 'You must enter a value';
-    }
+    pass: ['', Validators.required],
+  }, { updateOn: 'submit' });
 
-    return email.hasError('email') ? 'Not a valid email' : '';
+  hide = true;
+  errors: string[];
+
+  getErrorMessages() {
+    let email = this.login_form.get('email');
+    let pass = this.login_form.get('pass');
+    this.errors = [];
+    email.hasError('required') ? this.errors.push('Email cannot be empty.') : '';
+    email.hasError('email') ? this.errors.push('Not a valid email') : '';
+    pass.hasError('required') ? this.errors.push('Password cannot be empty.') : '';
+  }
+
+  login() {
+    this.getErrorMessages();
   }
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {}

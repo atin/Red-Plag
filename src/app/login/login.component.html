@@ -1,17 +1,24 @@
 <div class="container">
-  <form [formGroup]="login_form">
+  <form [formGroup]="login_form" (ngSubmit)="login()">
+    <div class="errors" *ngIf="login_form.invalid">
+      <mat-error *ngFor="let error of errors" >
+        <mat-icon>error</mat-icon>{{ error }}
+      </mat-error>
+    </div>
+
     <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
       <input matInput placeholder="abc@xyz.com" formControlName="email" required />
-      <mat-error *ngIf="login_form.get('email').invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Enter your password</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" formControlName="pass" />
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </mat-form-field>
+
+    <button class="login-btn" mat-stroked-button color="primary" type="submit">Log in</button>
   </form>
 </div>

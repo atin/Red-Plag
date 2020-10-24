@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// All modules for form field
+// All modules used in angular material components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,10 +22,10 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatToolbarModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatToolbarModule,
     AppRoutingModule,
     ReactiveFormsModule,
   ],
