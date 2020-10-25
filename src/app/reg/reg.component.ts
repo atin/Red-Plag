@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { ErrorMessages } from '../interfaces';
+
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
@@ -16,20 +18,23 @@ export class RegComponent implements OnInit {
   }, { updateOn: 'submit' });
 
   hide = true;
-  errors: string[];
+  errors: ErrorMessages = {};
 
   getErrorMessages() {
     let fn = this.signup_form.get('firstname');
     let ln = this.signup_form.get('lastname');
     let email = this.signup_form.get('email');
     let pass = this.signup_form.get('pass');
-    this.errors = [];
+    let confirm_pass = this.signup_form.get('confirm_pass');
 
-    fn.hasError('required') ? this.errors.push('First Name cannot be empty.') : '';
-    ln.hasError('required') ? this.errors.push('Last Name cannot be empty.') : '';
-    email.hasError('required') ? this.errors.push('Email cannot be empty.') : '';
-    email.hasError('email') ? this.errors.push('Not a valid email') : '';
-    pass.hasError('required') ? this.errors.push('Password cannot be empty.') : '';
+    this.errors = {};
+
+    fn.hasError('required') ? this.errors['fn'] = 'Enter first name' : '';
+    ln.hasError('required') ? this.errors['ln'] = 'Enter last name' : '';
+    email.hasError('required') ? this.errors['email'] = 'Enter email id' : '';
+    email.hasError('email') ? this.errors['email'] = 'Not a valid email' : '';
+    pass.hasError('required') ? this.errors['pass'] = 'Enter a password' : '';
+    confirm_pass.value != pass.value ? this.errors['confirm_pass'] = 'Does not match': '';
   }
 
   signup() {
