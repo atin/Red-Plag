@@ -5,7 +5,7 @@
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstname" required />
-        <mat-error *ngIf="signup_form.get('firstname').invalid" >
+        <mat-error>
           <mat-icon>error</mat-icon>{{ errors['fn'] }}
         </mat-error>
       </mat-form-field>
@@ -13,7 +13,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastname" required />
-        <mat-error *ngIf="signup_form.get('lastname').invalid" >
+        <mat-error>
           <mat-icon>error</mat-icon>{{ errors['ln'] }}
         </mat-error>
       </mat-form-field>
@@ -21,7 +21,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput placeholder="abc@xyz.com" formControlName="email" required />
-        <mat-error *ngIf="signup_form.get('email').invalid" >
+        <mat-error>
           <mat-icon>error</mat-icon>{{ errors['email'] }}
         </mat-error>
       </mat-form-field>
@@ -32,7 +32,7 @@
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="signup_form.get('pass').invalid" >
+        <mat-error>
           <mat-icon>error</mat-icon>{{ errors['pass'] }}
         </mat-error>
       </mat-form-field>
@@ -43,7 +43,7 @@
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="signup_form.get('confirm_pass').value != signup_form.get('pass').value" >
+        <mat-error>
           <mat-icon>error</mat-icon>{{ errors['confirm_pass'] }}
         </mat-error>
       </mat-form-field>

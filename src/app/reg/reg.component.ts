@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { ErrorMessages } from '../interfaces';
-
+import { mustMatch } from '../custom.validator';
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
@@ -15,7 +15,10 @@ export class RegComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     pass: ['', Validators.required],
     confirm_pass: [''],
-  }, { updateOn: 'submit' });
+  }, {
+    updateOn: 'submit',
+    validators: mustMatch('pass', 'confirm_pass'),
+  });
 
   hide = true;
   errors: ErrorMessages = {};
@@ -34,7 +37,7 @@ export class RegComponent implements OnInit {
     email.hasError('required') ? this.errors['email'] = 'Enter email id' : '';
     email.hasError('email') ? this.errors['email'] = 'Not a valid email' : '';
     pass.hasError('required') ? this.errors['pass'] = 'Enter a password' : '';
-    confirm_pass.value != pass.value ? this.errors['confirm_pass'] = 'Does not match': '';
+    confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = 'Confirm your password': '';
   }
 
   signup() {
