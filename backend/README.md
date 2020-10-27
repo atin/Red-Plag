@@ -8,7 +8,7 @@ The `User` folder is basically like an object for every user's account. It has t
 Now, websites will return JSON objects, so we need to interconvert between JSON and `Model` for databases. This job is performed using **DjangoRestFramework's serializer**. The `serializer.py` performs exactly this job.
 Now in the `views.py` file, we perform the standard API queries of `GET,POST,PUT,DELETE` which will handle adding new data in the database, retreive required data, modify and delete data, which is parallely represented in the database. Finally `urls.py` has the standard routing feature to represent data.
 
-##How to test the API?
+## How to test the API?
 
 - Install [**Postman**](https://www.postman.com/downloads/) and run it.
 - Run the django serve using `python3 manage.py runserver`. The port `127.0.0.1:8000` should be up and running.
