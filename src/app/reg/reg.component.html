@@ -28,9 +28,9 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="pass" required/>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        <input matInput [type]="hide_pass ? 'password' : 'text'" formControlName="pass" required/>
+        <button mat-icon-button matSuffix (click)="hide_pass = !hide_pass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide_pass" type="button" >
+          <mat-icon>{{ hide_pass ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['pass'] }}
@@ -39,9 +39,9 @@
         
       <mat-form-field appearance="fill">
         <mat-label>Confirm</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirm_pass" />
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button" >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        <input matInput [type]="hide_confirm ? 'password' : 'text'" formControlName="confirm_pass" />
+        <button mat-icon-button matSuffix (click)="hide_confirm = !hide_confirm" [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hide_confirm" type="button" >
+          <mat-icon>{{ hide_confirm ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['confirm_pass'] }}
