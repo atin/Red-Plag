@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
+import { UploadComponent } from './upload/upload.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegComponent },
+  { path: 'upload', component: UploadComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 
