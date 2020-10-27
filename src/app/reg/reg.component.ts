@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ErrorMessages } from '../interfaces';
-import { mustMatch } from '../custom.validator';
+import { ErrorMessages } from '../models/interfaces';
+import { mustMatch } from '../helpers/custom.validator';
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
   styleUrls: ['./reg.component.scss']
 })
 export class RegComponent implements OnInit {
-  // regex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[&#$@_|~`])$/;
 
   hide_pass = true;
   hide_confirm = true;
