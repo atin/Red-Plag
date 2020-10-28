@@ -11,7 +11,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule } from '@angular/common/http'
-import { UploadService } from './upload.service';
+import { UploadService } from '../services/upload.service';
 import { DialogComponent } from './dialog/dialog.component'
 
 @NgModule({
