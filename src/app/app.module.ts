@@ -17,6 +17,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UploadModule } from './upload/upload.module';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, LoginComponent, RegComponent],
@@ -32,6 +33,7 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     MatGridListModule,
     MatCardModule,
+    UploadModule
   ],
   providers: [],
   bootstrap: [AppComponent],
