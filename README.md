@@ -8,9 +8,10 @@ We also plan to develop a Command Line Interface using [click](https://click.pal
 - Frontend
   - ~~Login page~~ :white_check_mark:
   - ~~Registration page~~ :white_check_mark:
-  - Main page (where user will upload and download files)
+  - ~~Main page (where user will upload and download files)~~:white_check_mark:
   - Change Password option
   - Organisation Passcode
+- ~~Django Backend~~ :white_check_mark:
 - Django REST api for auth :closed_lock_with_key:
 - Database for user details :card_file_box:
 - The Algorithm :skull_and_crossbones:
