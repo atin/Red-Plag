@@ -12,11 +12,11 @@ module.exports = function upload(req, res) {
     console.log('file', file.name, "Dowloaded successfully");
     const readfile = fs.readFileSync(file.path);
     const path = require('path');
-    var dir = '../files';
+    var dir = '../data/files/';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
-    fs.copyFile(file.path, "../files/" + file.name, () => { });
+    fs.copyFile(file.path, dir + file.name, () => { });
     fs.unlinkSync(file.path);
   });
   form.on('end', () => {

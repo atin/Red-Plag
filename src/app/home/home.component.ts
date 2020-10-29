@@ -1,21 +1,47 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { UploadService } from '../../services/upload.service';
 import { forkJoin } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+
+import { UploadService } from '../services/upload.service';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class HomeComponent implements OnInit {
+  openUploadDialog() {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '50%',
+      height: '50%',
+    });
+  }
+
+  constructor(public dialog: MatDialog, public uploadService: UploadService) {
+    console.log('afdsfsdf')
+  }
+
+  ngOnInit(): void {
+  }
+
+}
+
+@Component({
+  templateUrl: './upload.html',
+  styleUrls: ['./upload.scss'],
+})
+export class DialogComponent {
   @ViewChild('file', { static: false }) file;
 
   public files: Set<File> = new Set();
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, public uploadService: UploadService) { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    public uploadService: UploadService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   progress;
   canBeClosed = true;
@@ -50,7 +76,7 @@ export class DialogComponent implements OnInit {
     this.progress = this.uploadService.upload(this.files);
     console.log(this.progress);
     for (const key in this.progress) {
-      this.progress[key].progress.subscribe(val => console.log(val));
+      this.progress[key].progress.subscribe((val) => console.log(val));
     }
 
     // convert the progress map into an array
@@ -72,7 +98,7 @@ export class DialogComponent implements OnInit {
     this.showCancelButton = false;
 
     // When all progress-observables are completed...
-    forkJoin(allProgressObservables).subscribe(end => {
+    forkJoin(allProgressObservables).subscribe((end) => {
       // ... the dialog can be closed again...
       this.canBeClosed = true;
       this.dialogRef.disableClose = false;
@@ -85,3 +111,4 @@ export class DialogComponent implements OnInit {
     });
   }
 }
+

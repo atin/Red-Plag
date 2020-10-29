@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 // Angular Material Modules
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,17 +11,30 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UploadModule } from './upload/upload.module';
+import { HomeComponent, DialogComponent } from './home/home.component';
+import { UploadService } from './services/upload.service';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, LoginComponent, RegComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    LoginComponent,
+    RegComponent,
+    HomeComponent,
+    DialogComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -29,13 +43,17 @@ import { UploadModule } from './upload/upload.module';
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
+    MatDialogModule,
+    MatListModule,
+    MatProgressBarModule,
     AppRoutingModule,
     ReactiveFormsModule,
     MatGridListModule,
     MatCardModule,
-    UploadModule
+    FlexLayoutModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [UploadService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
