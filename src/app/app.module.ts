@@ -25,6 +25,7 @@ import { RegComponent } from './reg/reg.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent, DialogComponent } from './home/home.component';
 import { UploadService } from './services/upload.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { UploadService } from './services/upload.service';
     FlexLayoutModule,
     HttpClientModule,
   ],
-  providers: [UploadService],
+  providers: [UploadService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

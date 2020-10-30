@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ErrorMessages } from '../models/interfaces';
+import { ErrorMessages } from '../models/errors';
 import { mustMatch } from '../helpers/custom.validator';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
+
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
@@ -14,23 +17,23 @@ export class RegComponent implements OnInit {
   hide_confirm = true;
 
   signup_form = this.fb.group({
-    firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    email: ['', [Validators.required, Validators.email]],
-    pass: ['', [Validators.required, Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")]],
-    confirm_pass: [''],
+    firstName: ['a', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    lastName: ['a', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    email: ['daffas@a.co', [Validators.required, Validators.email]],
+    password: ['some@valU1', [Validators.required, Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")]],
+    confirm_pass: ['some@valU1'],
   }, {
     updateOn: 'submit',
-    validators: mustMatch('pass', 'confirm_pass'),
+    validators: mustMatch('password', 'confirm_pass'),
   });
 
   errors: ErrorMessages = {};
 
   getErrorMessages() {
-    let fn = this.signup_form.get('firstname');
-    let ln = this.signup_form.get('lastname');
+    let fn = this.signup_form.get('firstName');
+    let ln = this.signup_form.get('lastName');
     let email = this.signup_form.get('email');
-    let pass = this.signup_form.get('pass');
+    let pass = this.signup_form.get('password');
     let confirm_pass = this.signup_form.get('confirm_pass');
 
     this.errors = {};
@@ -44,12 +47,19 @@ export class RegComponent implements OnInit {
     pass.hasError('required') ? this.errors['pass'] = 'Enter a password' : '';
     pass.hasError('pattern') ? this.errors['pass'] = 'Not a valid password': '';
     confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = 'Confirm your password': '';
-    console.log(this.errors)
   }
 
   signup() {
     this.getErrorMessages();
+    if(Object.keys(this.errors).length){
+      return;
+    }
+
+    let userData = this.signup_form.value;
+    delete userData.confirm_pass;
+    userData = userData as User;
+    this.user.signup(userData).subscribe( out => console.log(out));
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private user: UserService) {}
   ngOnInit(): void {}
 }

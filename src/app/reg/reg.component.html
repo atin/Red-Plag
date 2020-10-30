@@ -4,7 +4,7 @@
     <mat-card-content> 
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstname" required />
+        <input matInput formControlName="firstName" required />
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['fn'] }}
         </mat-error>
@@ -12,7 +12,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastname" required />
+        <input matInput formControlName="lastName" required />
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['ln'] }}
         </mat-error>
@@ -28,7 +28,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide_pass ? 'password' : 'text'" formControlName="pass" required/>
+        <input matInput [type]="hide_pass ? 'password' : 'text'" formControlName="password" required/>
         <button mat-icon-button matSuffix (click)="hide_pass = !hide_pass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide_pass" type="button" >
           <mat-icon>{{ hide_pass ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
