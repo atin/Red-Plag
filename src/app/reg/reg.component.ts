@@ -12,15 +12,20 @@ import { User } from '../models/user';
   styleUrls: ['./reg.component.scss']
 })
 export class RegComponent implements OnInit {
-
+  username_regex = "^(?=.{6,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$";
+  pass_regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
   hide_pass = true;
   hide_confirm = true;
 
   signup_form = this.fb.group({
-    firstName: ['a', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    lastName: ['a', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    email: ['daffas@a.co', [Validators.required, Validators.email]],
-    password: ['some@valU1', [Validators.required, Validators.pattern("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")]],
+    first_name: ['a',
+      [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    last_name: ['a',
+      [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    username: ['daffas',
+      [Validators.required, Validators.pattern(this.username_regex)]],
+    password: ['some@valU1',
+      [Validators.required, Validators.pattern(this.pass_regex)]],
     confirm_pass: ['some@valU1'],
   }, {
     updateOn: 'submit',
@@ -30,9 +35,9 @@ export class RegComponent implements OnInit {
   errors: ErrorMessages = {};
 
   getErrorMessages() {
-    let fn = this.signup_form.get('firstName');
-    let ln = this.signup_form.get('lastName');
-    let email = this.signup_form.get('email');
+    let fn = this.signup_form.get('first_name');
+    let ln = this.signup_form.get('last_name');
+    let username = this.signup_form.get('username');
     let pass = this.signup_form.get('password');
     let confirm_pass = this.signup_form.get('confirm_pass');
 
@@ -42,8 +47,8 @@ export class RegComponent implements OnInit {
     fn.hasError('pattern') ? this.errors['fn'] = 'Not a valid name' : '';
     ln.hasError('required') ? this.errors['ln'] = 'Enter last name' : '';
     ln.hasError('pattern') ? this.errors['ln'] = 'Not a valid name' : '';
-    email.hasError('required') ? this.errors['email'] = 'Enter email id' : '';
-    email.hasError('email') ? this.errors['email'] = 'Not a valid email' : '';
+    username.hasError('required') ? this.errors['username'] = 'Enter username' : '';
+    username.hasError('pattern') ? this.errors['username'] = 'Not a valid username' : '';
     pass.hasError('required') ? this.errors['pass'] = 'Enter a password' : '';
     pass.hasError('pattern') ? this.errors['pass'] = 'Not a valid password': '';
     confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = 'Confirm your password': '';
@@ -51,9 +56,7 @@ export class RegComponent implements OnInit {
 
   signup() {
     this.getErrorMessages();
-    if(Object.keys(this.errors).length){
-      return;
-    }
+    if(Object.keys(this.errors).length){ return; }
 
     let userData = this.signup_form.value;
     delete userData.confirm_pass;

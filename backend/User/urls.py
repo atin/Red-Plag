@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from User import views
+from . import views
 
 urlpatterns = [
     url(r'^user/$', views.UserApi),
-    url(r'^user/([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$', views.UserApi)
+    url(r'^user/^(?=.{6,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$', views.UserApi)
 ]
