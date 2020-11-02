@@ -18,15 +18,11 @@ export class RegComponent implements OnInit {
   hide_confirm = true;
 
   signup_form = this.fb.group({
-    first_name: ['a',
-      [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    last_name: ['a',
-      [Validators.required, Validators.pattern('[a-zA-Z]*')]],
-    username: ['daffas',
-      [Validators.required, Validators.pattern(this.username_regex)]],
-    password: ['some@valU1',
-      [Validators.required, Validators.pattern(this.pass_regex)]],
-    confirm_pass: ['some@valU1'],
+    first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+    username: ['', [Validators.required, Validators.pattern(this.username_regex)]],
+    password: ['', [Validators.required, Validators.pattern(this.pass_regex)]],
+    confirm_pass: [''],
   }, {
     updateOn: 'submit',
     validators: mustMatch('password', 'confirm_pass'),
