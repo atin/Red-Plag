@@ -17,8 +17,8 @@ def UserApi(request, username=''):
         user_serializer = UserSerializer(data=user)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("Record added successfully!", safe=False)
-        return JsonResponse("Record could not be added", safe=False)
+            return JsonResponse(True, safe=False)
+        return JsonResponse(False, safe=False)
 
     elif request.method == "PUT":
         user_data = JSONParser().parse(request)
@@ -26,8 +26,8 @@ def UserApi(request, username=''):
         user_serializer = UserSerializer(user, data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            return JsonResponse("Successfully updated!", safe=False)
-        return JsonResponse("Record could not be updated", safe=False)
+            return JsonResponse(True, safe=False)
+        return JsonResponse(False, safe=False)
 
     elif request.method == "DELETE":
         user = User.objects.get(username=user_data['username'])
