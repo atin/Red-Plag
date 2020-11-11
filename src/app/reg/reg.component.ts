@@ -53,20 +53,21 @@ export class RegComponent implements OnInit {
 
   signup() {
     this.getErrorMessages();
-    if(Object.keys(this.errors).length){ return; }
-
-    let userData = this.signup_form.value;
-    delete userData.confirm_pass;
-    userData = userData as User;
-    this.user.signup(userData).subscribe( reg_success => {
-      console.log(reg_success);
-      if (reg_success) {
-        this.router.navigate(['/login']);
-      } else {
-        this.errors['username'] = 'username already taken';
-        // console.log(this.errors)
-      }
-    });
+    if(Object.keys(this.errors).length == 0){
+      let userData = this.signup_form.value;
+      delete userData.confirm_pass;
+      userData = userData as User;
+      
+      this.user.signup(userData).subscribe( reg_success => {
+        console.log(reg_success);
+        if (reg_success) {
+          this.router.navigate(['/login']);
+        } else {
+          this.errors['username'] = 'username already taken';
+          console.log(this.errors)
+        }
+      });
+    }
   }
   constructor(private fb: FormBuilder, private user: UserService, private router: Router) {}
   ngOnInit(): void {}
