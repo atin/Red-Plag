@@ -2,33 +2,33 @@
   <mat-card-title>Sign up</mat-card-title>
   <form [formGroup]="signup_form" (ngSubmit)="signup()">
     <mat-card-content> 
-      <mat-form-field appearance="fill">
+      <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstname" required />
+        <input matInput formControlName="first_name" required />
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['fn'] }}
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastname" required />
+        <input matInput formControlName="last_name" required />
         <mat-error>
           <mat-icon>error</mat-icon>{{ errors['ln'] }}
         </mat-error>
       </mat-form-field>
       
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="abc@xyz.com" formControlName="email" required />
+      <mat-form-field [hideRequiredMarker]="true" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" required />
         <mat-error>
-          <mat-icon>error</mat-icon>{{ errors['email'] }}
+          <mat-icon>error</mat-icon>{{ errors['username'] }}
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide_pass ? 'password' : 'text'" formControlName="pass" required/>
+        <input matInput [type]="hide_pass ? 'password' : 'text'" formControlName="password" required/>
         <button mat-icon-button matSuffix (click)="hide_pass = !hide_pass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide_pass" type="button" >
           <mat-icon>{{ hide_pass ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
@@ -37,7 +37,7 @@
         </mat-error>
       </mat-form-field>
         
-      <mat-form-field appearance="fill">
+      <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>Confirm</mat-label>
         <input matInput [type]="hide_confirm ? 'password' : 'text'" formControlName="confirm_pass" />
         <button mat-icon-button matSuffix (click)="hide_confirm = !hide_confirm" [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hide_confirm" type="button" >
