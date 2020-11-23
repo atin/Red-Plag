@@ -10,7 +10,9 @@ export class UserService {
   private login_url = '';
   private signup_url = 'http://127.0.0.1:8000/user/';
 
-  public login(user: User) {};
+  public login(user: User) {
+    // login method here
+  };
   public signup(user: User) {
     return this.http.post(this.signup_url, JSON.stringify(user));
   }

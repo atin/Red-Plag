@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ErrorMessages } from '../models/errors';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -34,9 +36,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.getErrorMessages();
     if(Object.keys(this.errors).length == 0){
-      
+      let userData = this.login_form.value as User;
+      console.log(userData);
+      // this.userService.login(userData).subscribe()
     }
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {}
 }

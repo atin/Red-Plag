@@ -58,7 +58,7 @@ export class RegComponent implements OnInit {
       delete userData.confirm_pass;
       userData = userData as User;
       
-      this.user.signup(userData).subscribe( reg_success => {
+      this.userService.signup(userData).subscribe( reg_success => {
         console.log(reg_success);
         if (reg_success) {
           this.router.navigate(['/login']);
@@ -69,6 +69,6 @@ export class RegComponent implements OnInit {
       });
     }
   }
-  constructor(private fb: FormBuilder, private user: UserService, private router: Router) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
   ngOnInit(): void {}
 }
