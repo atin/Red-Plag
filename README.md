@@ -40,6 +40,6 @@ We also plan to develop a Command Line Interface using [click](https://click.pal
 ## :sparkles: Team :sparkles:
 
 - [Amit Meena](https://github.com/meenaamit)
-- [Atin Bainada](https://github.com/LeoAB10)
+- [Atin Bainada](https://github.com/atin)
 - [Koustav Sen](https://github.com/koustav1908)
 - [Soham Mistri](https://github.com/sohammistri)
