@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ErrorMessages } from '../models/errors';
-import { mustMatch } from '../helpers/custom.validator';
+import { mustMatch, not_unique } from '../helpers/custom.validator';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 
@@ -26,7 +26,7 @@ export class RegComponent implements OnInit {
     confirm_pass: ['A@123abcd'],
   }, {
     updateOn: 'submit',
-    validators: mustMatch('password', 'confirm_pass'),
+    validators: [mustMatch('password', 'confirm_pass'), not_unique('username')],
   });
 
   errors: ErrorMessages = {};
@@ -48,7 +48,7 @@ export class RegComponent implements OnInit {
     username.hasError('pattern') ? this.errors['username'] = 'Not a valid username' : '';
     pass.hasError('required') ? this.errors['pass'] = 'Enter a password' : '';
     pass.hasError('pattern') ? this.errors['pass'] = 'Not a valid password': '';
-    confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = 'Confirm your password': '';
+    confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = "Passwords doesn't match": '';
   }
 
   signup() {
@@ -63,7 +63,9 @@ export class RegComponent implements OnInit {
         if (reg_success) {
           this.router.navigate(['/login']);
         } else {
-          this.errors['username'] = 'username already taken';
+          let username = this.signup_form.get('username');
+          username.setErrors({not_unique: true});
+          this.errors['username'] = 'Username already taken';
           console.log(this.errors)
         }
       });

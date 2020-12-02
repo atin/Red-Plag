@@ -16,3 +16,12 @@ export function mustMatch(pass: string, confirm: string) {
     }
   };
 }
+
+export function not_unique(username: string) {
+  return (fg: FormGroup) => {
+    const username_control = fg.controls[username];
+    if(username_control.errors) {
+      return;
+    }
+  }
+}

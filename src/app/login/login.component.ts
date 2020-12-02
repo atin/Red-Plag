@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   login_form = this.fb.group({
-    username: ['', [Validators.required, Validators.pattern(this.username_regex)]],
-    password: ['', [Validators.required, Validators.pattern(this.pass_regex)]],
+    username: ['abcdef', [Validators.required, Validators.pattern(this.username_regex)]],
+    password: ['A@123abcd', [Validators.required, Validators.pattern(this.pass_regex)]],
   }, { updateOn: 'submit' });
 
   errors: ErrorMessages = {};
@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
     if(Object.keys(this.errors).length == 0){
       let userData = this.login_form.value as User;
       console.log(userData);
-      // this.userService.login(userData).subscribe()
+      this.userService.login(userData).subscribe( login_success => {
+        console.log(login_success);
+      });
     }
   }
   constructor(private fb: FormBuilder, private userService: UserService) {}
