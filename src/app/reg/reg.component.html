@@ -1,7 +1,7 @@
 <mat-card class="container">
   <mat-card-title>Sign up</mat-card-title>
   <form [formGroup]="signup_form" (ngSubmit)="signup()">
-    <mat-card-content> 
+    <mat-card-content>
       <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="first_name" required />
@@ -17,7 +17,7 @@
           <mat-icon>error</mat-icon>{{ errors['ln'] }}
         </mat-error>
       </mat-form-field>
-      
+
       <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" required />
@@ -36,7 +36,7 @@
           <mat-icon>error</mat-icon>{{ errors['pass'] }}
         </mat-error>
       </mat-form-field>
-        
+
       <mat-form-field [hideRequiredMarker]="true" appearance="fill">
         <mat-label>Confirm</mat-label>
         <input matInput [type]="hide_confirm ? 'password' : 'text'" formControlName="confirm_pass" />
@@ -54,4 +54,3 @@
     </mat-card-actions>
   </form>
 </mat-card>
-  

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ErrorMessages } from '../models/errors';
 import { mustMatch, not_unique } from '../helpers/custom.validator';
@@ -51,19 +52,34 @@ export class RegComponent implements OnInit {
     confirm_pass.hasError('mustMatch') ? this.errors['confirm_pass'] = "Passwords doesn't match": '';
   }
 
+  openSnackBar(message: string, action: string) {
+    let regSnackBar = this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+    if (action == "Login now") {
+      regSnackBar.onAction().subscribe(() => {
+        this.router.navigate(['/login']);
+      });
+    }
+  }
+
   signup() {
     this.getErrorMessages();
+    
     if(Object.keys(this.errors).length == 0){
       let userData = this.signup_form.value;
       delete userData.confirm_pass;
       userData = userData as User;
-      
+
       this.userService.signup(userData).subscribe( reg_success => {
         console.log(reg_success);
+        let username = this.signup_form.get('username');
         if (reg_success) {
-          this.router.navigate(['/login']);
+          this.openSnackBar("User created. Going to login page.", "Login now");
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         } else {
-          let username = this.signup_form.get('username');
           username.setErrors({not_unique: true});
           this.errors['username'] = 'Username already taken';
           console.log(this.errors)
@@ -71,6 +87,6 @@ export class RegComponent implements OnInit {
       });
     }
   }
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private _snackBar: MatSnackBar) {}
   ngOnInit(): void {}
 }

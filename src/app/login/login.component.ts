@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { ErrorMessages } from '../models/errors';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
@@ -33,6 +36,19 @@ export class LoginComponent implements OnInit {
     pass.hasError('pattern') ? this.errors['pass'] = 'Not a valid password': '';
   }
 
+  openSnackBar(message: string, action: string) {
+    let loginSnackBar = this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+    loginSnackBar.onAction().subscribe(() => {
+      if (action == "Create a new account") {
+        this.router.navigate(['/signup']);
+      } else if (action == "Go to home page") {
+        this.router.navigate(['']);
+      }
+    });
+  }
+
   login() {
     this.getErrorMessages();
     if(Object.keys(this.errors).length == 0){
@@ -40,9 +56,14 @@ export class LoginComponent implements OnInit {
       console.log(userData);
       this.userService.login(userData).subscribe( login_success => {
         console.log(login_success);
+        if (login_success) {
+          this.openSnackBar("Login successful.", "Go to home page")
+        } else {
+          this.openSnackBar("Username/password doesn't match.", "Create a new account")
+        }
       });
     }
   }
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private _snackBar: MatSnackBar) {}
   ngOnInit(): void {}
 }

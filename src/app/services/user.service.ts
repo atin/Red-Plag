@@ -12,7 +12,7 @@ export class UserService {
 
   public login(user: User) {
     return this.http.post(this.login_url, JSON.stringify(user));
-  };
+  }
   public signup(user: User) {
     return this.http.post(this.signup_url, JSON.stringify(user));
   }
