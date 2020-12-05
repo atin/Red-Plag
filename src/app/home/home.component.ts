@@ -8,7 +8,7 @@ import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   openUploadDialog() {
@@ -18,13 +18,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  constructor(public dialog: MatDialog, public uploadService: UploadService) {
-    console.log('afdsfsdf')
-  }
+  constructor(public dialog: MatDialog, public uploadService: UploadService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
 
 @Component({
@@ -111,4 +107,3 @@ export class DialogComponent {
     });
   }
 }
-

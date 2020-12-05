@@ -70,20 +70,20 @@ export class RegComponent implements OnInit {
       let userData = this.signup_form.value;
       delete userData.confirm_pass;
       userData = userData as User;
-
-      this.userService.signup(userData).subscribe( reg_success => {
-        console.log(reg_success);
-        let username = this.signup_form.get('username');
-        if (reg_success) {
+      let username = this.signup_form.get('username');
+      this.userService.signup(userData).subscribe( (response) => {
+        console.log(response);
+        if (response.status == 201) {
           this.openSnackBar("User created. Going to login page.", "Login now");
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
-        } else {
-          username.setErrors({not_unique: true});
-          this.errors['username'] = 'Username already taken';
-          console.log(this.errors)
         }
+      },
+      (error) => {
+        console.error(error)
+        username.setErrors({not_unique: true});
+        this.errors['username'] = 'Username already taken';
       });
     }
   }

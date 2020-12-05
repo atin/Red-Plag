@@ -7,14 +7,14 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  private login_url = 'http://127.0.0.1:8000/signin/';
+  private login_url = 'http://127.0.0.1:8000/login/';
   private signup_url = 'http://127.0.0.1:8000/signup/';
 
   public login(user: User) {
-    return this.http.post(this.login_url, JSON.stringify(user))
-  };
+    return this.http.post(this.login_url, JSON.stringify(user), {observe: 'response'});
+  }
   public signup(user: User) {
-    return this.http.post(this.signup_url, JSON.stringify(user));
+    return this.http.post(this.signup_url, JSON.stringify(user), {observe: 'response'});
   }
   constructor(private http: HttpClient) {}
 }

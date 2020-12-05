@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../models/errors';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,12 +55,19 @@ export class LoginComponent implements OnInit {
     if(Object.keys(this.errors).length == 0){
       let userData = this.login_form.value as User;
       console.log(userData);
-      this.userService.login(userData).subscribe( login_success => {
-        console.log(login_success);
-        if (login_success) {
-          this.openSnackBar("Login successful.", "Go to home page")
-        } else {
-          this.openSnackBar("Username/password doesn't match.", "Create a new account")
+
+      this.userService.login(userData).subscribe( (response) => {
+        if (response.status == 202) {
+          this.openSnackBar("Login successful.", "Go to home page");
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
+        } 
+      },
+      (error) => {
+        console.error(error);
+        if (error.status == 401) {
+          this.openSnackBar("Username/password doesn't match.", "Create a new account");
         }
       });
     }
