@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../models/errors';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
