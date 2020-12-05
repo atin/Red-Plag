@@ -57,7 +57,7 @@ export class RegComponent implements OnInit {
       let userData = this.signup_form.value;
       delete userData.confirm_pass;
       userData = userData as User;
-      
+
       this.userService.signup(userData).subscribe( reg_success => {
         console.log(reg_success);
         if (reg_success) {

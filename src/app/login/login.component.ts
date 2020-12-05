@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ErrorMessages } from '../models/errors';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
     if(Object.keys(this.errors).length == 0){
       let userData = this.login_form.value as User;
       console.log(userData);
-      // this.userService.login(userData).subscribe()
+      this.userService.login(userData).subscribe(login_success => {
+        console.log(login_success);});
     }
   }
   constructor(private fb: FormBuilder, private userService: UserService) {}
