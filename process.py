@@ -2,8 +2,16 @@ from lcs import longest_subsequence, readfile
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import shutil
 
 path = './UPLOADS'
+
+path2 = './RESULTS'
+if not os.path.exists(path2):
+    os.makedirs(path2)
+else:
+    shutil.rmtree(path2)           # Removes all the subdirectories!
+    os.makedirs(path2)
 
 filenames = []
 files = []

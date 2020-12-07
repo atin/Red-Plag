@@ -3,6 +3,8 @@
 # My files
 /data
 /backend/backend/secrets.py
+/RESULTS
+/UPLOADS
 
 # compiled output
 /dist
