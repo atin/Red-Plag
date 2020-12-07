@@ -1,6 +1,5 @@
 import re
 
-
 def commentRemover(text):
     """
     The function commentRemover(text) removes comments from C++ and Java sourcecode files
