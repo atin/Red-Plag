@@ -12,7 +12,7 @@ module.exports = function upload(req, res) {
     console.log('file', file.name, "Dowloaded successfully");
     const readfile = fs.readFileSync(file.path);
     const path = require('path');
-    var dir = '../data/files/';
+    var dir = '../UPLOADS/';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }

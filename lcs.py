@@ -1,51 +1,5 @@
 import re
 
-def removeComments(text):
-
-    pattern = r"""
-                            ##  --------- COMMENT ---------
-           //.*?$           ##  Start of // .... comment
-         |                  ##
-           /\*              ##  Start of /* ... */ comment
-           [^*]*\*+         ##  Non-* followed by 1-or-more *'s
-           (                ##
-             [^/*][^*]*\*+  ##
-           )*               ##  0-or-more things which don't start with /
-                            ##    but do end with '*'
-           /                ##  End of /* ... */ comment
-         |                  ##  -OR-  various things which aren't comments:
-           (                ##
-                            ##  ------ " ... " STRING ------
-             "              ##  Start of " ... " string
-             (              ##
-               \\.          ##  Escaped char
-             |              ##  -OR-
-               [^"\\]       ##  Non "\ characters
-             )*             ##
-             "              ##  End of " ... " string
-           |                ##  -OR-
-                            ##
-                            ##  ------ ' ... ' STRING ------
-             '              ##  Start of ' ... ' string
-             (              ##
-               \\.          ##  Escaped char
-             |              ##  -OR-
-               [^'\\]       ##  Non '\ characters
-             )*             ##
-             '              ##  End of ' ... ' string
-           |                ##  -OR-
-                            ##
-                            ##  ------ ANYTHING ELSE -------
-             .              ##  Anything other char
-             [^/"'\\]*      ##  Chars which doesn't start a comment, string
-           )                ##    or escape
-    """
-    regex = re.compile(pattern, re.VERBOSE | re.MULTILINE | re.DOTALL)
-    noncomments = [m.group(2) for m in regex.finditer(text) if m.group(2)]
-
-    return "".join(noncomments)
-
-
 def commentRemover(text):
     def replacer(match):
         s = match.group(0)
@@ -83,7 +37,7 @@ def readfile(filename):
             data1[idx][:] = line
             idx += 1
     f.close()
-    return (line1, maxcolom1, data1)
+    return (line1, data1)
 
 
 def longest_subsequence(info1,info2):
@@ -91,8 +45,8 @@ def longest_subsequence(info1,info2):
     pers12 = 0.0
     pers21 = 0.0
     container1 = 0
-    (line1, maxcolom1, data1)=info1
-    (line2, maxcolom2, data2)=info2
+    (line1, data1)=info1
+    (line2, data2)=info2
     for i in range(line1):
         container1 += len(data1[i])
         container1 += 1
