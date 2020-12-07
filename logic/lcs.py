@@ -1,6 +1,14 @@
 import re
 
+
 def commentRemover(text):
+    """
+    The function commentRemover(text) removes comments from C++ and Java sourcecode files
+    Args:
+        sourcecode file as text string
+    Returns:
+        uncommented file
+    """
     def replacer(match):
         s = match.group(0)
         if s.startswith('/'):
@@ -15,7 +23,16 @@ def commentRemover(text):
 
 
 def readfile(filename):
-
+    """
+        The function readfile(filename) reads a sourcecode file character wise and generates matrix representation of the file
+        Args:
+            filename: relative path of file to read
+        Variables:
+            line1: #lines in file
+            data1: character matrix representation of file
+        Returns:
+            tuple(line1, data1)
+    """
     uncmtFile = ""
     with open(filename) as f:
         uncmtFile = commentRemover(f.read())
@@ -40,13 +57,22 @@ def readfile(filename):
     return (line1, data1)
 
 
-def longest_subsequence(info1,info2):
+def longest_subsequence(info1, info2):
+    """
+        This function longest_subsequence(info1, info2) finds length of longest common subsequence between two files
+        Args:
+            info1:  return value of readfile for file1
+            info2:  return value of readfile for file2
+        Key Variables:
+            pers12: percentage content of file1 likely copied from file2
+        Returns:
+            the percentage content of file1 likely copied from file2 
+    """
     line = 0.0
     pers12 = 0.0
-    pers21 = 0.0
     container1 = 0
-    (line1, data1)=info1
-    (line2, data2)=info2
+    (line1, data1) = info1
+    (line2, data2) = info2
     for i in range(line1):
         container1 += len(data1[i])
         container1 += 1
@@ -107,4 +133,3 @@ def longest_subsequence(info1,info2):
 
     pers12 = (line/len(matrix1))*100
     return pers12
-
