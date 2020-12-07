@@ -72,7 +72,7 @@ export class RegComponent implements OnInit {
       userData = userData as User;
       let username = this.signup_form.get('username');
       this.userService.signup(userData).subscribe( (response) => {
-        console.log(response);
+        console.log(response.body);
         if (response.status == 201) {
           this.openSnackBar("User created. Going to login page.", "Login now");
           setTimeout(() => {

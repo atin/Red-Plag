@@ -58,7 +58,9 @@ export class LoginComponent implements OnInit {
 
       this.userService.login(userData).subscribe( (response) => {
         if (response.status == 202) {
+          console.log(response.body['token'])
           this.openSnackBar("Login successful.", "Go to home page");
+          this.userService.set_login_status(true);
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 3000);
@@ -66,6 +68,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+        this.userService.set_login_status(false);
         if (error.status == 401) {
           this.openSnackBar("Username/password doesn't match.", "Create a new account");
         }

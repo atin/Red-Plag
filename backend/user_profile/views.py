@@ -22,9 +22,10 @@ def registerUser(request):
         # print(user_serializer.initial_data)
         if user_serializer.is_valid():
             user_serializer.save()
-            data = user_serializer.data
-            # token = Token.objects.get(user=profile).key
-            # data['token'] = token
+            data['username'] = user_data['username']
+            uid = User.objects.get(username=data['username'])
+            token = Token.objects.get(user=uid)
+            data['token'] = token.key
             return JsonResponse(data, status=status.HTTP_201_CREATED)
         else:
             data = user_serializer.errors()

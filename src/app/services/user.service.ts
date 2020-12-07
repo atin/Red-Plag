@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 import { User } from '../models/user';
 
 @Injectable({
@@ -9,12 +9,22 @@ import { User } from '../models/user';
 export class UserService {
   private login_url = 'http://127.0.0.1:8000/login/';
   private signup_url = 'http://127.0.0.1:8000/signup/';
-
+  private login_status: boolean = false;
   public login(user: User) {
     return this.http.post(this.login_url, JSON.stringify(user), {observe: 'response'});
   }
   public signup(user: User) {
     return this.http.post(this.signup_url, JSON.stringify(user), {observe: 'response'});
   }
-  constructor(private http: HttpClient) {}
+  public logout() {
+    this.set_login_status(false);
+    this.router.navigate(['/login']);
+  }
+  public set_login_status(status: boolean) {
+    this.login_status = status;
+  }
+  public is_logged_in():boolean {
+    return this.login_status;
+  }
+  constructor(private http: HttpClient, private router: Router) {}
 }

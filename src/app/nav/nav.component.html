@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
   <span>Red Plag</span>
   <span class="spacer"></span>
-  <a class="login" routerLink="/login">Log in</a>
-  <a class="signup" routerLink="/signup">Sign Up</a>
+  <a *ngIf="!this.userservice.is_logged_in()" class="login" routerLink="/login">Log in</a>
+  <a *ngIf="!this.userservice.is_logged_in()" class="signup" routerLink="/signup">Sign Up</a>
+  <a *ngIf="this.userservice.is_logged_in()" class="login" routerLink="/">Upload files</a>
+  <a *ngIf="this.userservice.is_logged_in()" class="signup" (click)="this.userservice.logout()">Logout</a>
 </mat-toolbar>
