@@ -65,7 +65,7 @@ export class RegComponent implements OnInit {
 
   signup() {
     this.getErrorMessages();
-    
+
     if(Object.keys(this.errors).length == 0){
       let userData = this.signup_form.value;
       delete userData.confirm_pass;
