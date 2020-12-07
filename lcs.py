@@ -152,6 +152,5 @@ def longest_subsequence(info1,info2):
             container2 -= 1
 
     pers12 = (line/len(matrix1))*100
-    pers21 = (line/len(matrix2))*100
-    return (pers12,pers21)
+    return pers12
 
