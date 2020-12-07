@@ -8,15 +8,24 @@ import {
 import { Subject } from 'rxjs'
 import { Observable } from 'rxjs'
 
-const url = 'http://localhost:8000/upload'
 
 @Injectable()
 export class UploadService {
+  private upload_url = 'http://localhost:8000/upload'
   constructor(private http: HttpClient) { }
 
-  public upload(files: Set<File>): { [key: string]: { progress: Observable<number> } } {
+  public upload(files: Set<File>,Token: string){
+    const uploadData = new FormData();
+    let i: number = 1;
+    files.forEach(file => {uploadData.append(`file${i}`,file,file.name);i=i+1;})
+    uploadData.append('token',Token);
+    return this.http.post(this.upload_url,uploadData);
+  }
+}
 
-    // this will be the our resulting map
+//: { [key: string]: { progress: Observable<number> } }
+
+/*this will be the our resulting map
     const status: { [key: string]: { progress: Observable<number> } } = {};
 
     files.forEach(file => {
@@ -57,6 +66,4 @@ export class UploadService {
     });
 
     // return the map of progress.observables
-    return status;
-  }
-}
+    return status;*/

@@ -23,7 +23,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent, DialogComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { UploadService } from './services/upload.service';
 import { UserService } from './services/user.service';
 
@@ -34,7 +34,7 @@ import { UserService } from './services/user.service';
     LoginComponent,
     RegComponent,
     HomeComponent,
-    DialogComponent,
+    //DialogComponent,
   ],
   imports: [
     BrowserModule,

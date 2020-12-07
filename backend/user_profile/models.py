@@ -7,8 +7,14 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
+def get_path(instance, filename):
+    return '/'.join([str(instance.user.username), filename])
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    file1 = models.FileField(blank=True, null=True, upload_to=get_path)
+    file2 = models.FileField(blank=True, null=True, upload_to=get_path)
 
     def __str__(self):
         return '{} Profile'.format(self.user.username)

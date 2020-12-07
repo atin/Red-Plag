@@ -53,4 +53,21 @@ def loginUser(request):
                 return JsonResponse(data, status=status.HTTP_401_UNAUTHORIZED)
 
 
-#     # return JsonResponse({}, status=status.HTTP_200_OK)
+@api_view(['POST', ])
+def uploadFiles(request):
+    if request.method == 'POST':
+        token = request.data['token']
+        user = Token.objects.get(key=token).user
+        user_data = user.__dict__
+        # print(profile['user'])
+        profile_serializer = ProfileSerializer(data=user_data)
+        # print(profile_serializer.initial_data)
+        data = {}
+        if profile_serializer.is_valid():
+            data = profile_serializer.data
+            Profile.objects.update_or_create(
+                user=user, defaults={'file1': request.data['file1'], 'file2': request.data['file2']})
+            return JsonResponse(data, status=status.HTTP_200_OK)
+        else:
+            #data = profile_serializer.errors()
+            return JsonResponse(data, status=status.HTTP_400_BAD_REQUEST)

@@ -7,12 +7,14 @@ import { ErrorMessages } from '../models/errors';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
+export let Token = ""
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit {
   username_regex = "^(?=.{3,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$";
   pass_regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
@@ -58,11 +60,13 @@ export class LoginComponent implements OnInit {
 
       this.userService.login(userData).subscribe( (response) => {
         if (response.status == 202) {
+          Token = response['body']['token'];
+          console.log(Token);
           this.openSnackBar("Login successful.", "Go to home page");
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 3000);
-        } 
+        }
       },
       (error) => {
         console.error(error);

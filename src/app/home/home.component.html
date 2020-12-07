@@ -1,5 +1,15 @@
 <div class="container">
   <div class="center">
-      <button mat-raised-button (click)="openUploadDialog()">Choose Files</button>
+       <label>
+            Upload File 1:
+           <input type="file" (change) = "onFileUpload($event)" />
+       </label>
+       <br>
+       <label>
+            Upload File 2:
+           <input type="file" (change) = "onFileUpload($event)" />
+       </label>
+       <br>
+      <button mat-raised-button (click)="uploadFile()">Upload</button>
   </div>
 </div>

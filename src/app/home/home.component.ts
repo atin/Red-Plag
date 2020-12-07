@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { UploadService } from '../services/upload.service';
+import { Token } from '../login/login.component'
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,33 @@ import { UploadService } from '../services/upload.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  openUploadDialog() {
+  public files: Set<File> = new Set();
+  constructor(public uploadService: UploadService) {}
+  ngOnInit(): void {}
+
+  onFileUpload(event: any){
+    this.files.add(event.target.files[0]);
+  }
+
+  uploadFile(){
+    console.log(Token)
+    if(Token == ""){
+      console.error("Not authorized!!")
+      return;
+    }
+    this.uploadService.upload(this.files,Token).subscribe(
+      (response)=>{
+        console.log(response);
+      },
+      (error)=>{
+        console.error(error);
+      }
+    )
+  }
+}
+
+
+/*openUploadDialog() {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '50%',
       height: '50%',
@@ -105,5 +132,4 @@ export class DialogComponent {
       // ... and the component is no longer uploading
       this.uploading = false;
     });
-  }
-}
+  }*/
