@@ -1,7 +1,7 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 <style>
-    body,
+ body,
     html {
         margin: 0;
         padding: 0;
@@ -73,14 +73,24 @@
         padding: 10px;
         margin-top: 10px;
     }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    a:hover{
+        color: white;
+        text-decoration: none;
+    }
+
 </style>
 <div class="container h-100">
     <div class="d-flex justify-content-center h-100">
         <div class="user_card">
             <div class="d-flex justify-content-center form_container">
-                <form method="POST">
-                    {% csrf_token %}
-                    <button class="btn login_btn" type="submit" name="run_script">RUN ALGORITHM</button>
+                <form>
+                <button class="btn login_btn" type="submit" name="run_script"><a href='../../../MEDIA/Results.zip'
+                        download>DOWLOAD RESULTS</a></button>
                 </form>
             </div>
         </div>

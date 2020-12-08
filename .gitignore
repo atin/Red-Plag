@@ -1,8 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # My files
-/Red_Plag/MEDIA
-/Red_Plag/RESULTS
+/Red_Plag/MEDIA/*
+/Red_Plag/RESULTS/*
 # compiled output
 /dist
 /tmp
@@ -54,7 +54,6 @@ Thumbs.db
 *.pyc
 __pycache__
 /Red_Plag/db.sqlite3
-MEDIA
 
 # Backup files # 
 *.bak 
