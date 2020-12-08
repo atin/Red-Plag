@@ -13,6 +13,10 @@ from .models import *
 from .forms import CreateUserForm
 
 def registerPage(request):
+	"""
+		This function handles user registration.
+		If the user is already authenticated then it redirects the user to home page otherwise it renders the register page and handles user registration process.
+	"""
 	if request.user.is_authenticated:
 		return redirect('home')
 	else:
@@ -31,6 +35,10 @@ def registerPage(request):
 
 
 def loginPage(request):
+	"""
+		This function handle user login.
+		If the user is already authenticated then it redirects the user to home page otherwise it renders the login page and handles user login process.
+	"""
 	if request.user.is_authenticated:
 		return redirect('home')
 	else:
@@ -51,6 +59,10 @@ def loginPage(request):
 
 
 def logoutUser(request):
+	"""
+		This function handles user logout process.
+		First this function clears the MEDIA directory and then it logout's the user.
+	"""
 	path2 = dirname(dirname(abspath(__file__))) + '\\MEDIA'
 	if not os.path.exists(path2):
 		os.makedirs(path2)
@@ -63,11 +75,17 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request):
+	"""
+		This function render's the home page.
+	"""
 	return render(request, 'accounts/main.html')
 
 
 @login_required(login_url='login')
 def uploadfile(request):
+	"""
+		This function handles the file upload process.
+	"""
 	if request.method == "POST":
 		request_file = request.FILES['document'] if 'document' in request.FILES else None
 		if request_file:
@@ -80,6 +98,9 @@ def uploadfile(request):
 
 @login_required(login_url='login')
 def initate(request):
+	"""
+		This function initiate the algorithm to compare the files and saves the results in MEDIA directory.
+	"""
 	path2 = dirname(dirname(abspath(__file__))) + '\\MEDIA'
 	command = ["python", str(dirname(abspath(__file__)))+"\\process.py"]
 	if request.method == 'POST' and 'run_script' in request.POST:
@@ -93,5 +114,5 @@ def initate(request):
 		except Exception as e:
 				print(e)
 				return redirect('upload')
-    	
+
 	return render(request, "accounts/process.html")
