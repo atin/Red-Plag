@@ -7,4 +7,5 @@ urlpatterns = [
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
     path('upload/', views.uploadfile, name="upload"),
+	path('algorithm/', views.initate, name="algorithm")
 ]

@@ -1,0 +1,89 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .user_card {
+        width: 350px;
+        margin-top: 100px;
+        margin-bottom: auto;
+        background: #74cfbf;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+
+    }
+
+    .form_container {
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    #form-title {
+        color: rgb(0, 0, 0);
+
+    }
+
+    .login_btn {
+        width: 100%;
+        background: #085235 !important;
+        color: white !important;
+    }
+
+    .login_btn:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+    }
+    .form-control{
+        height: 45px;
+    }
+    .login_container {
+        padding: 0 3rem;
+        padding-bottom: -1rem;
+        margin-top: 20px;
+    }
+
+    .input-group-text {
+        background: #f7ba5b !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+    }
+
+    .input_user,
+    .input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+    }
+
+    #messages {
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        margin-top: 10px;
+    }
+</style>
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center form_container">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn login_btn" type="submit" name="run_script">RUN ALGORITHM</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
