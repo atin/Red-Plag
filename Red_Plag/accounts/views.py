@@ -2,13 +2,13 @@ from django.contrib.messages.api import success
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from subprocess import Popen, PIPE, STDOUT
 from os.path import dirname, abspath
 import os
 import shutil
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 
 from .models import *
 from .forms import CreateUserForm
@@ -92,7 +92,7 @@ def uploadfile(request):
 		if request_file:
 			fs = FileSystemStorage()
 			fs.save(request_file.name, request_file)
-			return redirect('upload')
+			return redirect('algorithm')
 
 	return render(request, "accounts/upload.html")
 
@@ -106,17 +106,24 @@ def initate(request):
 	command = ["python", str(dirname(abspath(__file__)))+"\\process.py"]
 	if request.method == 'POST' and 'run_script' in request.POST:
 		try:
+			dir_name = dirname(dirname(abspath(__file__))) + '/MEDIA'
+			if os.path.exists(dir_name+'/Results.zip'):
+				os.remove(dir_name+'/Results.zip')
 			process = Popen(command, stdout=PIPE, stderr=STDOUT)
 			exitstatus = process.poll()
 			while(not os.path.exists(path2+"\\Results.zip")):
 				i=1
 			print('success')
-			return redirect('upload')
+			return redirect('download')
 		except Exception as e:
 				print(e)
-				return redirect('upload')
+				return redirect('download')
 
 	return render(request, "accounts/process.html")
+
+@login_required(login_url='login')
+def filedownload(request):
+	return render(request, "accounts/download.html")
 
 @login_required(login_url='login')
 def pass_change(request):
