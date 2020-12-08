@@ -12,24 +12,25 @@ def zipdir(path, ziph):
                 ziph.write(os.path.join(root, file))
 
 def zipify(path1, path2):
-    zipf = zipfile.ZipFile(path1+'\\Results.zip', 'w', zipfile.ZIP_DEFLATED)
+    zipf = zipfile.ZipFile(path1+'/Results.zip', 'w', zipfile.ZIP_DEFLATED)
     zipdir(path2, zipf)
     zipf.close()
 
 def start():
     """
-    The function start() iterates through all files in the ../UPLOADS directory and generates bar graphs for each file 
-    The graphs are stored as .png files in ../RESULTS directory
+    The function start() unzips all zip files in MEDIA directory, iterates through all files in it and generates bar graphs for each file 
+    The graphs are stored as .png files 
+    Finally all graphs are compressed into one zip file Results.zip in MEDIA directory
     Key Variables:
-        filenames[] : lists all the files in the UPLOADS directory
+        filenames[] : lists all the files in the MEDIA directory
         sim[] : Similarity percentage matrix
                 sim[i][j] = percentage content of file[i] likely copied from file[j]
     """
 
-    dir_name = dirname(dirname(abspath(__file__))) + '\\MEDIA'
+    dir_name = dirname(dirname(abspath(__file__))) + '/MEDIA'
     extension = ".zip"
-    if os.path.exists(dir_name+'\\Results.zip'):
-        os.remove(dir_name+'\\Results.zip')
+    if os.path.exists(dir_name+'/Results.zip'):
+        os.remove(dir_name+'/Results.zip')
 
     os.chdir(dir_name)  # change directory from working dir to dir with files
 
@@ -41,7 +42,7 @@ def start():
             zip_ref.close()  # close file
             os.remove(file_name)  # delete zipped file
 
-    path2 = dirname(dirname(abspath(__file__))) + '\\RESULTS'
+    path2 = dirname(dirname(abspath(__file__))) + '/RESULTS'
 
 
     if not os.path.exists(path2):
