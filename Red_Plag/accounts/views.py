@@ -1,7 +1,8 @@
 from django.contrib.messages.api import success
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from subprocess import Popen, PIPE, STDOUT
 from os.path import dirname, abspath
@@ -116,3 +117,18 @@ def initate(request):
 				return redirect('upload')
 
 	return render(request, "accounts/process.html")
+
+@login_required(login_url='login')
+def pass_change(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Password updated successfully!')
+            return redirect('pass-change')
+        else:
+            messages.error(request, 'Please check the errors above.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/pass-change.html', { 'form': form })
